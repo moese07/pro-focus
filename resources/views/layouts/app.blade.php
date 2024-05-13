@@ -7,12 +7,18 @@
 
         <title>{{ config('app.name') }}</title>
 
+        <!-- FullCalendar.js -->
+        <link href='https://cdn.jsdelivr.net/npm/fullcalendar/main.css' rel='stylesheet' />
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar/main.js'></script>
+        
+
         <!-- Fonts -->
 
         <!-- Scripts -->
+        <script src="https://cdn.tailwindcss.com"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="">
+    <body class="bg-white dark:bg-gray-700 text-black dark:text-white">
         <div class="min-h-screen">
             @include('layouts.navigation')
 
@@ -26,7 +32,7 @@
             @endif --}}
 
             <!-- Page Content -->
-            <main>
+            <main class="px-4">
                 {{ $slot }}
             </main>
         </div>

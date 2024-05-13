@@ -23,8 +23,9 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'due_date' => 'required',
+            'name' => 'required|min:3|max:40|string',
+            'description' => 'required|max:120|string',
+            'due_date' => 'required|date|after:yesterday',
         ]);
 
         $task = new Task();
@@ -46,8 +47,9 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'due_date' => 'required',
+            'name' => 'required|min:3|max:40|string',
+            'description' => 'required|max:120|string',
+            'due_date' => 'required|date|after:yesterday',
         ]);
 
         $task = Task::find($id);
@@ -76,5 +78,11 @@ class TaskController extends Controller
         $task->save();
 
         return redirect()->route('tasks.index');
+    }
+
+    public function calendar()
+    {
+        $tasks = Task::all();
+        return view('tasks.calendar')->with('tasks', $tasks);
     }
 }
